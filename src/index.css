@@ -2,4 +2,47 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: rgb(245, 245, 248);
 }
+
+.container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+/*.header {*/
+  /*align-self: center;*/
+/*}*/
+
+table {
+  border-collapse: collapse;
+}
+
+.row:hover {
+  background: rgb(237, 237, 237);
+}
+
+.delete-cell {
+  background-color: rgb(245, 245, 248);
+  color: black;
+  cursor: pointer;
+}
+/*.delete-row:hover {*/
+  /*background-color: aqua;*/
+/*}*/
+
+.cell {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  text-align: center;
+  width: 5rem;
+}
+
+.cell-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
