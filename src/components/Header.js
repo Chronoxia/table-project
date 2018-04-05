@@ -9,12 +9,14 @@ let Header = ({
 }) => (
   <p className="header">
     <button
-        onClick={() => addRow()}
+      className='btn btn-add'
+      onClick={() => addRow()}
     >
       Add row
     </button>
     {' '}
     <button
+      className='btn btn-add'
       onClick={() => addColumn()}
     >
       Add column

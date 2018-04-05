@@ -8,6 +8,8 @@ import Root from './components/Root';
 
 const store = configureStore();
 
+// localStorage.clear();
+
 // setInterval(() => console.log(store.getState()), 5000);
 
 render(

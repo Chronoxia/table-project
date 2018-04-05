@@ -1,16 +1,19 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import tableApp from './reducers';
 import { saveState, loadState } from './localStorage';
 
 const configureStore = () => {
-  const persistedState = loadState();
+  // const persistedState = loadState();
   const store = createStore(
       tableApp,
-      persistedState,
+      applyMiddleware(thunk)
     );
-  store.subscribe(() =>
-    saveState(store.getState())
-  );
+
+  // store.subscribe(() =>
+  //   saveState(store.getState())
+  // );
+
   return store;
 };
 

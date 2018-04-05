@@ -1,4 +1,4 @@
-import v4 from '../utils';
+import { ADD_ROW, ADD_COLUMN, DELETE_ROW, DELETE_COLUMN, EDIT_CELL, ADD_CELL } from '../constants';
 
 const initialState = {
   cells: {
@@ -44,51 +44,33 @@ const initialState = {
 const tableApp = (state = initialState, action) => {
   let copy = JSON.parse(JSON.stringify(state));
   switch (action.type) {
-    case 'EDIT_CELL':
-      copy = { ...state };
+    case EDIT_CELL:
       copy.cells[action.payload.id] = {
         ...copy.cells[action.payload.id],
         text: action.payload.text
       };
       return copy;
-    case 'ADD_ROW':
-      const newRow = copy.columnsById.map(columnId => {
-        const cellId = v4();
-        copy.cells[cellId] = {
-          id: cellId,
-          text: '',
-          columnId,
-          rowId: action.payload.rowId,
-        };
-        return cellId;
-      });
-      copy.rows[action.payload.rowId] = {
-        rowId: action.payload.rowId,
-        cells: newRow,
-      };
+    case ADD_CELL:
+      copy.cells[action.payload.cell.id] = action.payload.cell;
+      return copy;
+    case ADD_ROW:
+      copy.rows[action.payload.rowId] = action.payload;
       copy.rowsById.push(action.payload.rowId);
       return copy;
-    case 'DELETE_ROW':
+    case DELETE_ROW:
       copy.rows[action.payload.id].cells.forEach(id => {
         delete copy.cells[id]
       });
       delete copy.rows[action.payload.id];
       copy.rowsById = copy.rowsById.filter(id => id !== action.payload.id);
       return copy;
-    case 'ADD_COLUMN':
-      copy.rowsById.forEach(rowId => {
-        const cellId = v4();
-        copy.cells[cellId] = {
-          id: cellId,
-          text: '',
-          columnId: action.payload.id,
-          rowId
-        };
-        copy.rows[rowId].cells.push(cellId);
+    case ADD_COLUMN:
+      action.payload.cells.forEach(cell => {
+        copy.rows[cell.rowId].cells.push(cell.id);
       });
-      copy.columnsById.push(action.payload.id);
+      copy.columnsById.push(action.payload.columnId);
       return copy;
-    case 'DELETE_COLUMN':
+    case DELETE_COLUMN:
       copy.rowsById.forEach(id => {
         copy.rows[id].cells = copy.rows[id].cells.filter(cellId => {
           const check = copy.cells[cellId].columnId !== action.payload.id;
