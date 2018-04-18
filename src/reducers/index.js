@@ -38,7 +38,7 @@ const initialState = {
     }
   },
   columnsById: ['column-1', 'column-2', ],
-  rowsById: ['row-1', 'row-2', ]
+  rowsById: ['row-1', 'row-2', ],
 };
 
 const tableApp = (state = initialState, action) => {

@@ -1,40 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addRow, addColumn } from '../actions';
+import { bindActionCreators } from 'redux';
+import { addRow, addColumn } from '../actions/index';
 
 let Header = ({
-  addRow,
-  addColumn,
+  actions,
 }) => (
   <p className="header">
     <button
       className='btn btn-add'
-      onClick={() => addRow()}
+      onClick={() => actions.addRow()}
     >
       Add row
     </button>
     {' '}
     <button
       className='btn btn-add'
-      onClick={() => addColumn()}
+      onClick={() => actions.addColumn()}
     >
       Add column
     </button>
   </p>
 );
 Header.propTypes = {
-  addRow: PropTypes.func,
-  addColumn: PropTypes.func,
+  actions: PropTypes.shape({
+    addRow: PropTypes.func,
+    addColumn: PropTypes.func,
+  })
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  addRow() {
-    dispatch(addRow())
-  },
-  addColumn() {
-    dispatch(addColumn())
-  },
+  actions: bindActionCreators({ addRow, addColumn }, dispatch),
 });
 
 Header = connect(

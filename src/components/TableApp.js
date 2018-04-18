@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Table from './Table';
-import Header from './Header';
+import Table from '../containers/Table';
+import Header from '../containers/Header';
 
 const TableApp = () => (
   <div className='container'>

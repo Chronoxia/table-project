@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableCell from './TableCell';
+import TableCell from '../containers/TableCell';
 
 const TableRow = ({
   rowId,

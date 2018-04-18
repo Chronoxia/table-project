@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { getRows, getColumns } from '../reducers';
-import TableRow from './TableRow';
-import ButtonsRow from './ButtonsRow';
-import { deleteRow, deleteColumn } from '../actions';
+import { getRows, getColumns } from '../reducers/index';
+import TableRow from '../components/TableRow';
+import ButtonsRow from '../components/ButtonsRow';
+import { deleteRow, deleteColumn } from '../actions/index';
 
 let Table = ({
  rows,
  columns,
- deleteRow,
- deleteColumn,
+ actions,
 }) => (
   <table>
     <tbody>
@@ -19,12 +19,12 @@ let Table = ({
         <TableRow
           {...row}
           key={row.rowId}
-          deleteRow={deleteRow}
+          deleteRow={actions.deleteRow}
         />
       ))}
         <ButtonsRow
-            columns={columns}
-            deleteColumn={deleteColumn}
+          columns={columns}
+          deleteColumn={actions.deleteColumn}
         />
     </tbody>
   </table>
@@ -33,8 +33,10 @@ let Table = ({
 Table.propTypes = {
   rows: PropTypes.array,
   columns: PropTypes.array,
-  deleteRow: PropTypes.func,
-  deleteColumn: PropTypes.func,
+  actions: PropTypes.shape({
+    deleteColumn: PropTypes.func,
+    deleteRow: PropTypes.func,
+  }),
 };
 
 const mapStateToProps = (state) => ({
@@ -43,12 +45,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  deleteColumn(id) {
-    dispatch(deleteColumn(id))
-  },
-  deleteRow(id) {
-    dispatch(deleteRow(id))
-  },
+  actions: bindActionCreators({ deleteColumn, deleteRow }, dispatch)
 });
 
 Table = connect(
