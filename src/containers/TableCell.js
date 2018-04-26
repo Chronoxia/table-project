@@ -78,7 +78,7 @@ class TableCell extends Component {
 
     return (
       <td
-        className='cell'
+        className={this.state.isEditing ? 'cell cell-editing' : 'cell'}
         onDoubleClick={() => this.handleDoubleClick()}
       >
         {element}

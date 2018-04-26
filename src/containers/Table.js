@@ -1,42 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { getRows, getColumns } from '../reducers/index';
-import TableRow from '../components/TableRow';
-import ButtonsRow from '../components/ButtonsRow';
-import { deleteRow, deleteColumn } from '../actions/index';
+import TableRow from './TableRow';
+import ButtonsRow from './ButtonsRow';
 
 let Table = ({
  rows,
  columns,
- actions,
-}) => (
-  <table>
-    <tbody>
-      {rows.map(row => (
-        <TableRow
-          {...row}
-          key={row.rowId}
-          deleteRow={actions.deleteRow}
-        />
-      ))}
+}) => {
+
+  if (columns.length === 0 || rows.length === 0) {
+    return <p>There is nothing to fetch.</p>
+  }
+
+  return (
+    <table>
+      <tbody>
+        {rows.map(id => (
+          <TableRow
+            rowId={id}
+            key={id}
+          />
+        ))}
         <ButtonsRow
           columns={columns}
-          deleteColumn={actions.deleteColumn}
         />
-    </tbody>
-  </table>
-);
+      </tbody>
+    </table>
+  )
+};
 
 Table.propTypes = {
   rows: PropTypes.array,
   columns: PropTypes.array,
-  actions: PropTypes.shape({
-    deleteColumn: PropTypes.func,
-    deleteRow: PropTypes.func,
-  }),
+  // actions: PropTypes.shape({
+  //   deleteColumn: PropTypes.func,
+  //   deleteRow: PropTypes.func,
+  // }),
 };
 
 const mapStateToProps = (state) => ({
@@ -44,13 +46,9 @@ const mapStateToProps = (state) => ({
   columns: getColumns(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ deleteColumn, deleteRow }, dispatch)
-});
-
 Table = connect(
   mapStateToProps,
-  mapDispatchToProps,
+  null,
 )(Table);
 
 export default Table;

@@ -89,11 +89,13 @@ const tableApp = (state = initialState, action) => {
 
 export default tableApp;
 
-export const getRows = (state) =>
-    state.rowsById.map(rowId => state.rows[rowId]);
+export const getRows = (state) => state.rowsById;
+
+export const getRowCells = (state, id) =>
+  state.rows[id].cells;
 
 export const getColumns = (state) =>
-    state.columnsById;
+  state.columnsById;
 
 export const getCellText = (state, id) =>
-    state.cells[id].text;
+  state.cells[id].text;

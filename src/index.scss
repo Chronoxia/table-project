@@ -1,21 +1,28 @@
+$primary-color: #f5f5f8;
+$secondary-color: #00bbf9;
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Comic Sans MS", Arial, sans-serif;
-  background-color: #f5f5f8; }
+  background-color: $primary-color;
+}
 
 .container {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  margin-top: 50px; }
+  margin-top: 50px;
+}
 
 table {
-  border-collapse: collapse; }
+  border-collapse: collapse;
+}
 
 .row:hover {
-  background: #ededed; }
+  background: #ededed;
+}
 
 .cell {
   border: 1px solid #999;
@@ -23,28 +30,39 @@ table {
   font-size: 15px;
   text-align: center;
   width: 6rem;
-  height: 30px; }
-  .cell-editing {
-    border: 1px double #00bbf9;
+  height: 30px;
+
+  &-editing {
+    border: 1px double $secondary-color;
     background-color: white;
-    z-index: 3; }
-  .cell-delete {
-    background-color: #f5f5f8;
+    z-index: 3  ;
+  }
+
+  &-delete {
+    background-color: $primary-color;
     color: black;
-    cursor: pointer; }
-  .cell-input {
+    cursor: pointer;
+  }
+
+  &-input {
     background-color: inherit;
     width: 100%;
     box-sizing: border-box;
     font-size: 14px;
     outline: 0;
-    border: none; }
+    border: none;
+  }
+}
 
 .delete-column {
+  //background-color: $primary-color;
   border: none;
-  color: red; }
-  .delete-column span {
-    cursor: pointer; }
+  color: red;
+
+  span {
+    cursor: pointer;
+  }
+}
 
 .btn {
   font-size: 20px;
@@ -56,6 +74,13 @@ table {
   margin: 0 10px;
   cursor: pointer;
   border: none;
-  transition-duration: 0.3s; }
-  .btn:hover {
-    background-color: #00bbf9; }
+  transition-duration: 0.3s;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
+
+//.btn:hover {
+//  background-color: $secondary-color;
+//}
