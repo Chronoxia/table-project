@@ -46,7 +46,7 @@ class TableCell extends Component {
     }
   };
 
-  handleDoubleClick() {
+  handleDoubleClick = () => {
     this.setState({
       isEditing: true
     })
@@ -79,7 +79,7 @@ class TableCell extends Component {
     return (
       <td
         className={this.state.isEditing ? 'cell cell-editing' : 'cell'}
-        onDoubleClick={() => this.handleDoubleClick()}
+        onDoubleClick={this.handleDoubleClick}
       >
         {element}
       </td>
