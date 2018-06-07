@@ -8,6 +8,8 @@ import Root from './components/Root';
 
 const store = configureStore();
 
+const test = () => 1;
+
 render(
   <Root store={store} />,
   document.getElementById('root')
